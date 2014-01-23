@@ -19,6 +19,30 @@
     <Filter Include="Source Files\StateManagement">
       <UniqueIdentifier>{f9648a9e-5e88-4ba2-a144-acf307ce1284}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{0fdb4762-6452-4a82-9d60-4192e543bf92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{e5529f57-9cfb-4f75-bf51-7e0033c37052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Content">
+      <UniqueIdentifier>{1f4ae841-aae6-4183-9deb-b0606daa9cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Content">
+      <UniqueIdentifier>{05eab6d8-e174-487f-8d54-f30343cca4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InputHandling">
+      <UniqueIdentifier>{59db3461-cbc3-4c0a-aa7e-adfbb961cc51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InputHandling">
+      <UniqueIdentifier>{d5884d6d-4f52-42bc-b9ac-d9f57235a78b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{cdd7268b-d195-48a6-8817-ae8433ebd404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{249978c4-e877-4024-9546-1fa0f00c4a94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -33,6 +57,21 @@
     <ClInclude Include="GameScreen.h">
       <Filter>Header Files\StateManagement</Filter>
     </ClInclude>
+    <ClInclude Include="ContentManager.h">
+      <Filter>Header Files\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="CC_Texture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\InputHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Header Files\InputHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -46,6 +85,18 @@
     </ClCompile>
     <ClCompile Include="GameScreen.cpp">
       <Filter>Source Files\StateManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="CC_Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentManager.cpp">
+      <Filter>Source Files\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source Files\InputHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

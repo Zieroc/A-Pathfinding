@@ -5,10 +5,16 @@
 Game::Game()
 {
 	m_Running = true;
+	m_p_ScreenManager = NULL;
+	m_LastTime = SDL_GetTicks();
+	m_p_ContentManager = NULL;
 }
 
 Game::~Game()
 {
+	delete(m_p_ScreenManager);
+	delete(m_p_ContentManager);
+	//delete(m_p_Camera);
 }
 
 bool Game::Initialize(const char* title, int x, int y, int width, int height, int flags)
@@ -34,12 +40,22 @@ bool Game::Initialize(const char* title, int x, int y, int width, int height, in
 				DEBUG_MSG("Renderer Creation Failed");
 				return false;
 			}
+
+			//Initialise SDL_mixer
+			if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) != 0)
+			{
+				DEBUG_MSG("Audio Initialisation Failed");
+				return false; 
+			}
 		}
 		else
 		{
 			DEBUG_MSG("Window Creation Failed");
 			return false;
 		}
+
+		m_p_ContentManager = new ContentManager(m_p_Renderer);
+		m_p_ScreenManager = new ScreenManager(m_p_Renderer, m_p_ContentManager);
 		return true;
 	}
 	else
@@ -52,11 +68,14 @@ bool Game::Initialize(const char* title, int x, int y, int width, int height, in
 void Game::Draw()
 {
 	SDL_RenderClear(m_p_Renderer);
+	m_p_ScreenManager->Draw();
 	SDL_RenderPresent(m_p_Renderer);
 }
 
 void Game::Update()
 {
+	m_p_ScreenManager->Update(GetTimeElapsed());
+	m_LastTime = SDL_GetTicks(); //Update time
 }
 
 void Game::HandleEvents()
@@ -74,6 +93,8 @@ void Game::HandleEvents()
 			break;
 		}
 	}
+
+	m_p_ScreenManager->HandleEvents(event); // If it isn't an main event let the screens handle it
 }
 
 bool Game::IsRunning()
@@ -84,8 +105,14 @@ bool Game::IsRunning()
 void Game::CleanUp()
 {
 	DEBUG_MSG("Cleaning Up");
+	Mix_CloseAudio();
 	SDL_DestroyWindow(m_p_Window);
 	SDL_DestroyRenderer(m_p_Renderer);
 	SDL_Quit();
 	m_Running = false;
+}
+
+Uint32 Game::GetTimeElapsed()
+{
+	return SDL_GetTicks() - m_LastTime;
 }

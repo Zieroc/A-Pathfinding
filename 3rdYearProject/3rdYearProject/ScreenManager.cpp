@@ -2,9 +2,10 @@
 #include <iostream>
 
 
-ScreenManager::ScreenManager(SDL_Renderer* renderer)
+ScreenManager::ScreenManager(SDL_Renderer* renderer, ContentManager* conMan)
 {
 	m_p_Renderer = renderer;
+	m_p_ContentManager = conMan;
 }
 
 ScreenManager::~ScreenManager()
@@ -24,12 +25,12 @@ void ScreenManager::Initialize()
 
 void ScreenManager::LoadContent()
 {
-	//m_p_Screens.front()->LoadContent();
+	m_p_Screens.front()->LoadContent(m_p_ContentManager);
 }
 
 void ScreenManager::UnloadContent()
 {
-	//m_p_Screens.front()->UnloadContent();
+	m_p_Screens.front()->UnloadContent();
 }
 
 void ScreenManager::Update(Uint32 timeElapsed)
@@ -77,9 +78,7 @@ void ScreenManager::AddScreen(GameScreen* screen, bool removePrevious)
 {
 	if(removePrevious)
 	{
-		m_p_Screens.front()->UnloadContent();
-		delete(m_p_Screens.front());
-		m_p_Screens.pop_front();
+		RemoveScreen();
 	}
 	else
 	{
@@ -87,21 +86,24 @@ void ScreenManager::AddScreen(GameScreen* screen, bool removePrevious)
 	}
 
 	screen->Initialize(this);
-	//screen->LoadContent();
+	screen->LoadContent(m_p_ContentManager);
 	m_p_Screens.push_front(screen);
 }
 
 void ScreenManager::AddPopup(GameScreen* popup)
 {
 	popup->Initialize(this);
-	//screen->LoadContent();
+	popup->LoadContent(m_p_ContentManager);
 	m_p_Screens.push_front(popup);
 }
 
 void ScreenManager::RemoveScreen()
 {
-	m_p_Screens.front()->UnloadContent();
-	delete(m_p_Screens.front());
-	m_p_Screens.pop_front();
-	m_p_Screens.front()->SetCovered(false);
+	if(!m_p_Screens.empty)
+	{
+		m_p_Screens.front()->UnloadContent();
+		delete(m_p_Screens.front());
+		m_p_Screens.pop_front();
+		m_p_Screens.front()->SetCovered(false);
+	}
 }

@@ -77,16 +77,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CC_Texture.h" />
+    <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="ICommand.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="ScreenManager.h" />
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CC_Texture.cpp" />
+    <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
