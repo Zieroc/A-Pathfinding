@@ -1,7 +1,9 @@
 #ifndef GAMESCREEN_H
 #define GAMESCREEN_H
 #include "Debug.h"
+#include "ContentManager.h"
 #include <SDL.h>
+#include "InputHandler.h"
 
 class ScreenManager; //Forward declaration
 
@@ -15,7 +17,7 @@ public:
 	virtual void UnloadContent() = 0;
 	virtual void Update(Uint32 timeElapsed) = 0;
 	virtual void Draw(SDL_Renderer* renderer) = 0;
-	//virtual void HandleInput(InputHandler* input) = 0;
+	virtual void HandleInput(InputHandler* input) = 0;
 	virtual void HandleEvents(SDL_Event sdlEvent) = 0;
 	bool IsCovered();
 	void SetCovered(bool covered);

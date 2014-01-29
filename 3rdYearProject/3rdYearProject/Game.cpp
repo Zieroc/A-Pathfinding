@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "GamePlayScreen.h"
 #include <iostream>
 
 
@@ -8,13 +9,19 @@ Game::Game()
 	m_p_ScreenManager = NULL;
 	m_LastTime = SDL_GetTicks();
 	m_p_ContentManager = NULL;
+	SDL_Rect levelRect;
+	levelRect.x = 0;
+	levelRect.y = 0;
+	levelRect.w = 27 * 32;
+	levelRect.h = 27 * 32;
+	m_p_Camera = new Camera(0, 0, 864, 640, levelRect);
 }
 
 Game::~Game()
 {
 	delete(m_p_ScreenManager);
 	delete(m_p_ContentManager);
-	//delete(m_p_Camera);
+	delete(m_p_Camera);
 }
 
 bool Game::Initialize(const char* title, int x, int y, int width, int height, int flags)
@@ -55,7 +62,8 @@ bool Game::Initialize(const char* title, int x, int y, int width, int height, in
 		}
 
 		m_p_ContentManager = new ContentManager(m_p_Renderer);
-		m_p_ScreenManager = new ScreenManager(m_p_Renderer, m_p_ContentManager);
+		m_p_ScreenManager = new ScreenManager(m_p_Renderer, m_p_ContentManager, m_p_Camera);
+		m_p_ScreenManager->AddScreen(new GameplayScreen(), false);
 		return true;
 	}
 	else

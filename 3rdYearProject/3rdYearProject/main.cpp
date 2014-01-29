@@ -1,14 +1,16 @@
 //TESTING
 #include "Game.h"
 #include <iostream>
+#include <time.h>
 
 int main(int args, char* p_args[])
 {
+	srand (time(NULL));
 
 	Game* game = new Game();
 	DEBUG_MSG("Game Object Created");
 
-	game->Initialize("TEST", 100, 100, 320, 320, SDL_WINDOW_SHOWN);
+	game->Initialize("TEST", 100, 100, 864, 640, SDL_WINDOW_SHOWN);
 	DEBUG_MSG("Game Initialised");
 
 	DEBUG_MSG("Starting Game Loop");

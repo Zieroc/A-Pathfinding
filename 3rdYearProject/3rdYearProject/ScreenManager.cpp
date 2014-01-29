@@ -2,10 +2,12 @@
 #include <iostream>
 
 
-ScreenManager::ScreenManager(SDL_Renderer* renderer, ContentManager* conMan)
+ScreenManager::ScreenManager(SDL_Renderer* renderer, ContentManager* conMan, Camera* camera)
 {
 	m_p_Renderer = renderer;
 	m_p_ContentManager = conMan;
+	m_p_Camera = camera;
+	m_p_InputHandler = new InputHandler();
 }
 
 ScreenManager::~ScreenManager()
@@ -13,10 +15,12 @@ ScreenManager::~ScreenManager()
 	while(!m_p_Screens.empty())
 	{
 		//Unload any content held by that screen
-		//m_p_Screens.front()->UnloadContent();
+		m_p_Screens.front()->UnloadContent();
 		delete(m_p_Screens.front());
 		m_p_Screens.pop_front();
 	}
+
+	delete(m_p_InputHandler);
 }
 
 void ScreenManager::Initialize()
@@ -39,9 +43,12 @@ void ScreenManager::Update(Uint32 timeElapsed)
 
 	m_p_UpdateScreens.clear();
 
-	for(forward_list<GameScreen*>::const_iterator iter = m_p_Screens.begin(); iter != m_p_Screens.end(); ++iter)
+	for(auto iter = m_p_Screens.begin(); iter != m_p_Screens.end(); ++iter)
 	{
-		m_p_UpdateScreens.push_front(*iter);
+		if(iter != m_p_Screens.end())
+		{
+			m_p_UpdateScreens.push_front(*iter);
+		}
 	}
 
     while (!m_p_UpdateScreens.empty())
@@ -54,7 +61,7 @@ void ScreenManager::Update(Uint32 timeElapsed)
         screen->Update(timeElapsed);
 	}
 
-	//m_p_Screens.front()->HandleInput(m_p_InputHandler);
+	m_p_Screens.front()->HandleInput(m_p_InputHandler);
 }
 
 void ScreenManager::HandleEvents(SDL_Event sdlEvent)
@@ -82,7 +89,10 @@ void ScreenManager::AddScreen(GameScreen* screen, bool removePrevious)
 	}
 	else
 	{
-		m_p_Screens.front()->SetCovered(true);
+		if(!m_p_Screens.empty())
+		{
+			m_p_Screens.front()->SetCovered(true);
+		}
 	}
 
 	screen->Initialize(this);
@@ -99,11 +109,16 @@ void ScreenManager::AddPopup(GameScreen* popup)
 
 void ScreenManager::RemoveScreen()
 {
-	if(!m_p_Screens.empty)
+	if(!m_p_Screens.empty())
 	{
 		m_p_Screens.front()->UnloadContent();
 		delete(m_p_Screens.front());
 		m_p_Screens.pop_front();
 		m_p_Screens.front()->SetCovered(false);
 	}
+}
+
+Camera* ScreenManager::GetCamera()
+{
+	return m_p_Camera;
 }

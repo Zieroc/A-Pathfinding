@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "ContentManager.h"
 #include "ScreenManager.h"
+#include "GamePlayScreen.h"
 #include <SDL.h>
 
 class Game
@@ -24,8 +25,7 @@ private:
 	ScreenManager* m_p_ScreenManager;
 	Uint32 m_LastTime; //The time of the last frame
 	ContentManager* m_p_ContentManager;
-	//Camera* m_p_Camera;
+	Camera* m_p_Camera;
 };
 
 #endif
-
