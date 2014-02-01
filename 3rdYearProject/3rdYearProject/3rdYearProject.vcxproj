@@ -79,35 +79,51 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CC_Texture.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePlayScreen.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="ICommand.h" />
+    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LevelMap.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Tilemap.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CC_Texture.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePlayScreen.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="LevelMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Tilemap.cpp" />
+    <ClCompile Include="Vector2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

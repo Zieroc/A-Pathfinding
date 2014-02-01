@@ -1,117 +1,76 @@
 #include "Camera.h"
 
 
-Camera::Camera(float x, float y, float  width, float height, SDL_Rect levelRect)
+Camera::Camera(Vector2 pos, Vector2 size, SDL_Rect levelRect)
 {
-	m_PositionX = x;
-	m_PositionY = y;
-	m_ViewPortW = width;
-	m_ViewPortH = height;
+	m_Position = pos;
+	m_ViewPortSize = size;
 	m_LevelRectangle = levelRect;
 }
-
 
 Camera::~Camera()
 {
 }
 
-void Camera::Move(float x, float y)
+void Camera::Move(Vector2 amount)
 {
-	float newPosX = m_PositionX + x;
-	float newPosY = m_PositionY + y;
+	Vector2 newPos = m_Position + amount;
 
-	if(newPosX < 0)
-	{
-		newPosX = 0;
-	}
-	else if(newPosX > m_LevelRectangle.w - m_ViewPortW)
-	{
-		newPosX = m_LevelRectangle.w - m_ViewPortW;
-	}
-	if(newPosY < 0)
-	{
-		newPosY = 0;
-	}
-	else if(newPosY > m_LevelRectangle.h - m_ViewPortH)
-	{
-		newPosY = m_LevelRectangle.h - m_ViewPortH;
-	}
+	newPos.Clamp(Vector2(m_LevelRectangle.x, m_LevelRectangle.y), Vector2(m_LevelRectangle.w - m_ViewPortSize.x, m_LevelRectangle.h - m_ViewPortSize.y));
 
-	m_PositionX = newPosX;
-	m_PositionY = newPosY;
+	m_Position = newPos;
 }
 
 bool Camera::IsObjectVisible(SDL_Rect objectBounds)
 {
 	SDL_Rect viewPort;
-	viewPort.x = m_PositionX;
-	viewPort.y = m_PositionY;
-	viewPort.w = m_ViewPortW;
-	viewPort.h = m_ViewPortH;
+	viewPort.x = m_Position.x;
+	viewPort.y = m_Position.y;
+	viewPort.w = m_ViewPortSize.x;
+	viewPort.h = m_ViewPortSize.y;
 
 	return SDL_HasIntersection(&viewPort, &objectBounds);
 }
 
-float Camera::XLocationToScreen(float Xlocation)
+Vector2 Camera::LocationToScreen(Vector2 location)
 {
-	Xlocation -= m_PositionX;
-	return Xlocation;
-}
-
-float Camera::YLocationToScreen(float Ylocation)
-{
-	Ylocation -= m_PositionY;
-	return Ylocation;
+	location -= m_Position;
+	return location;
 }
 
 SDL_Rect Camera::LocationToScreen(SDL_Rect location)
 {
-	location.x -= (int)m_PositionX;
-	location.y -= (int)m_PositionY;
+	location.x -= (int)m_Position.x;
+	location.y -= (int)m_Position.y;
 	return location;
 }
 
-float Camera::XScreenToLocation(float Xlocation)
+Vector2 Camera::ScreenToLocation(Vector2 location)
 {
-	Xlocation += m_PositionX;
-	return Xlocation;
-}
-
-float Camera::YScreenToLocation(float Ylocation)
-{
-	Ylocation += m_PositionY;
-	return Ylocation;
+	location += m_Position;
+	return location;
 }
 
 SDL_Rect Camera::ScreenToLocation(SDL_Rect location)
 {
-	location.x += (int)m_PositionX;
-	location.y += (int)m_PositionY;
+	location.x += (int)m_Position.x;
+	location.y += (int)m_Position.y;
 	return location;
 }
 
-float Camera::GetPositionX()
+Vector2 Camera::GetPosition()
 {
-	return m_PositionX;
+	return m_Position;
 }
 
-float Camera::GetPositionY()
+Vector2 Camera::GetViewPortSize()
 {
-	return m_PositionY;
+	return m_ViewPortSize;
 }
 
-float Camera::GetViewPortW()
-{
-	return m_ViewPortW;
-}
-
-float Camera::GetViewPortH()
-{
-	return m_ViewPortH;
-}
-
-void Camera::CalcViewPort(float amount)
-{
-	m_ViewPortW *= amount;
-	m_ViewPortH *= amount;
-}
+//May use for zooming and such
+//void Camera::CalcViewPort(float amount)
+//{
+//	m_ViewPortSize.x *= amount;
+//	m_ViewPortSize.y *= amount;
+//}

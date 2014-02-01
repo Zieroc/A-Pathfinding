@@ -14,7 +14,7 @@ Game::Game()
 	levelRect.y = 0;
 	levelRect.w = 27 * 32;
 	levelRect.h = 27 * 32;
-	m_p_Camera = new Camera(0, 0, 864, 640, levelRect);
+	m_p_Camera = new Camera(Vector2(0, 0), Vector2(864, 640), levelRect);
 }
 
 Game::~Game()

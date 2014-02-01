@@ -44,19 +44,19 @@ void GameplayScreen::HandleInput(InputHandler* input)
 {
 	if(input->KeyPressed(SDLK_w))
 	{
-		m_p_Manager->GetCamera()->Move(0, -5);
+		m_p_Manager->GetCamera()->Move(Vector2(0, -5));
 	}
 	if(input->KeyPressed(SDLK_s))
 	{
-		m_p_Manager->GetCamera()->Move(0, 5);
+		m_p_Manager->GetCamera()->Move(Vector2(0, 5));
 	}
 	if(input->KeyPressed(SDLK_a))
 	{
-		m_p_Manager->GetCamera()->Move(-5, 0);
+		m_p_Manager->GetCamera()->Move(Vector2(-5, 0));
 	}
 	if(input->KeyPressed(SDLK_d))
 	{
-		m_p_Manager->GetCamera()->Move(5, 0);
+		m_p_Manager->GetCamera()->Move(Vector2(5, 0));
 	}
 	if(input->KeyPressed(SDLK_SPACE))
 	{

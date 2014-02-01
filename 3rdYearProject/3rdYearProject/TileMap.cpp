@@ -85,11 +85,11 @@ void TileMap::SetTileAtCell(int x, int y, int index, bool passable)
 void TileMap::Draw(SDL_Renderer* renderer, Camera* camera)
 {
 	//Get the start and end map cell numbers that can be seen on screen
-	int startX = GetCellByPointX((int)camera->GetPositionX());
-	int endX = GetCellByPointX((int)camera->GetPositionX() + camera->GetViewPortW());
+	int startX = GetCellByPointX((int)camera->GetPosition().x);
+	int endX = GetCellByPointX((int)camera->GetPosition().x + camera->GetViewPortSize().x);
 
-	int startY = GetCellByPointY((int)camera->GetPositionY());
-	int endY = GetCellByPointY((int)camera->GetPositionY() + camera->GetViewPortH());
+	int startY = GetCellByPointY((int)camera->GetPosition().y);
+	int endY = GetCellByPointY((int)camera->GetPosition().y + camera->GetViewPortSize().y);
 
 	for (int x = startX; x <= endX; x++)
 	{
