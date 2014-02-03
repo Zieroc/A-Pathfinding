@@ -13,6 +13,7 @@ public:
 	~Sprite();
 	void Update(Uint32 timeElapsed);
 	void Draw(SDL_Renderer* renderer, Vector2 position, Camera* camera);
+	CC_Texture* GetTexture();
 private:
 	CC_Texture* m_p_Texture;
 	SDL_Rect m_SourceRect; //Used to crop the image for animation frames

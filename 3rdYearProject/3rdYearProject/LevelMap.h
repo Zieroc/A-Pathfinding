@@ -18,8 +18,9 @@ public:
 	void OpenConnection(int room1, int room2);
 	void OpenDoor(int dir, int col, int row);
 	vector<int> GetClosedConnections(int room, vector<int> closedRooms);
+	TileMap* GetMap();
 private:
-	Room* m_Rooms[NUM_ROOMS];
+	Room* m_Rooms[TileMap::NUM_ROOMS];
 	TileMap* m_p_Map;
 };
 

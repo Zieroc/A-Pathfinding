@@ -100,3 +100,15 @@ Vector2 Vector2::operator/=(const Vector2& other)
 	y /= other.y;
 	return *this;
 }
+
+bool Vector2::operator==(const Vector2& other)
+{
+	if(x == other.x && y == other.y)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

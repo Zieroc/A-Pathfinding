@@ -6,6 +6,8 @@
 #include "InputHandler.h"
 #include "LevelMap.h"
 
+#include "GameObject.h"
+
 class GameplayScreen : public GameScreen
 {
 public:
@@ -21,6 +23,7 @@ public:
 private:
 	LevelMap* m_p_Map;
 	bool pressed;
+	GameObject* m_p_Object;
 };
 
 #endif

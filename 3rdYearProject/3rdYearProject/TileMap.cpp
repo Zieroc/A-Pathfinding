@@ -9,7 +9,7 @@ TileMap::TileMap(CC_Texture* tileSheet)
 	{
 		for(int j = 0; j < MAP_HEIGHT; j++)
 		{
-			m_p_MapCells[i][j] = new Tile(DEFAULT_TILE, true);
+			m_p_MapCells[i][j] = new Tile(DEFAULT_TILE, true, i, j);
 		}
 	}
 

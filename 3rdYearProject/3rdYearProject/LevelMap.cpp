@@ -13,7 +13,7 @@ LevelMap::~LevelMap()
 {
 	delete(m_p_Map);
 
-	for(int i = 0; i < NUM_ROOMS; i++)
+	for(int i = 0; i < TileMap::NUM_ROOMS; i++)
 	{
 		if(m_Rooms[i] != NULL)
 		{
@@ -27,20 +27,20 @@ void LevelMap::GenerateMap()
 	m_p_Map->ClearMap();
 	vector<int> openRooms;
 	vector<int> closedRooms;
-	int connections[NUM_ROOMS];
-	for(int i = 0; i < NUM_ROOMS; i++)
+	int connections[TileMap::NUM_ROOMS];
+	for(int i = 0; i < TileMap::NUM_ROOMS; i++)
 	{
 		connections[i] = 0;
 	}
 
 	int activeRoom = 1;
 	bool finished = false;
-	for(int i = 0; i < NUM_ROOMS; i++)
+	for(int i = 0; i < TileMap::NUM_ROOMS; i++)
 	{
 		closedRooms.push_back(i + 1);
 	}
 
-	for(int v = 0; v < NUM_ROOMS; v++)
+	for(int i = 0; i < TileMap::NUM_ROOMS; i++)
 	{
 		DEBUG_MSG(activeRoom);
 		openRooms.push_back(activeRoom);
@@ -62,13 +62,13 @@ void LevelMap::GenerateMap()
 			}
 			else
 			{
-				v = NUM_ROOMS;
+				i = TileMap::NUM_ROOMS;
 			}
 				
 		}
 		else
 		{
-			v = NUM_ROOMS;
+			i = TileMap::NUM_ROOMS;
 		}
 	}
 
@@ -78,19 +78,19 @@ void LevelMap::GenerateMap()
 		int room = openRooms.front();
 		openRooms.erase(openRooms.begin());
 		openRooms.shrink_to_fit();
-		int col = (room % NUM_ROOMS_COL) - 1;
+		int col = (room % TileMap::NUM_ROOMS_COL) - 1;
 		int row = ((room - 1) / 3);
 		if(col < 0)
 		{
-			col = NUM_ROOMS_COL - 1;
+			col = TileMap::NUM_ROOMS_COL - 1;
 		}
 		int lvl = rand() % 3 + 1;
 		std::ostringstream ss;
 		ss << "data/Files/Room" << lvl << ".lvl";
-		m_p_Map->LoadRoom(ss.str().c_str(), 0 + (col * ROOM_WIDTH), 0 + (row * ROOM_HEIGHT));	
+		m_p_Map->LoadRoom(ss.str().c_str(), 0 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT));	
 	}
 
-	for(int i = 0; i < NUM_ROOMS; i++)
+	for(int i = 0; i < TileMap::NUM_ROOMS; i++)
 	{
 		if(connections[i] > 0)
 		{
@@ -106,18 +106,18 @@ void LevelMap::Draw(SDL_Renderer* renderer, Camera* camera)
 
 void LevelMap::OpenConnection(int room1, int room2)
 {
-	int col1 = (room1 % NUM_ROOMS_COL) - 1;
-	int row1 = ((room1 - 1) / 3);
+	int col1 = (room1 % TileMap::NUM_ROOMS_COL) - 1;
+	int row1 = ((room1 - 1) / TileMap::NUM_ROOMS_ROW);
 	if(col1 < 0)
 	{
-		col1 = NUM_ROOMS_COL - 1;
+		col1 = TileMap::NUM_ROOMS_COL - 1;
 	}
 
-	int col2 = (room2 % NUM_ROOMS_COL) - 1;
-	int row2 = ((room2 - 1) / 3);
+	int col2 = (room2 % TileMap::NUM_ROOMS_COL) - 1;
+	int row2 = ((room2 - 1) / TileMap::NUM_ROOMS_ROW);
 	if(col2 < 0)
 	{
-		col2 = NUM_ROOMS_COL - 1;
+		col2 = TileMap::NUM_ROOMS_COL - 1;
 	}
 
 	int dir1 = 0;
@@ -161,24 +161,24 @@ void LevelMap::OpenDoor(int dir, int col, int row)
 	switch(dir)
 	{
 	case 1:
-		m_p_Map->SetTileAtCell(3 + (col * ROOM_WIDTH), 0 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(4 + (col * ROOM_WIDTH), 0 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(5 + (col * ROOM_WIDTH), 0 + (row * ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(3 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(4 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(5 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true);
 		break;
 	case 2:
-		m_p_Map->SetTileAtCell(ROOM_WIDTH - 1 + (col * ROOM_WIDTH), 3 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(ROOM_WIDTH - 1 + (col * ROOM_WIDTH), 4 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(ROOM_WIDTH - 1 + (col * ROOM_WIDTH), 5 + (row * ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 3 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 4 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 5 + (row * TileMap::ROOM_HEIGHT), 1, true);
 		break;
 	case 3:
-		m_p_Map->SetTileAtCell(3 + (col * ROOM_WIDTH), ROOM_HEIGHT - 1 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(4 + (col * ROOM_WIDTH), ROOM_HEIGHT - 1 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(5 + (col * ROOM_WIDTH), ROOM_HEIGHT - 1 + (row * ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(3 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(4 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(5 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true);
 		break;
 	case 4:
-		m_p_Map->SetTileAtCell(0 + (col * ROOM_WIDTH), 3 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(0 + (col * ROOM_WIDTH), 4 + (row * ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(0 + (col * ROOM_WIDTH), 5 + (row * ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 3 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 4 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 5 + (row * TileMap::ROOM_HEIGHT), 1, true);
 		break;
 	default:
 		break;
@@ -189,11 +189,11 @@ void LevelMap::OpenDoor(int dir, int col, int row)
 vector<int> LevelMap::GetClosedConnections(int room, vector<int> closedRooms)
 {
 	vector<int> closedConnections;
-	int col = (room % NUM_ROOMS_COL) - 1;
-	int row = ((room - 1) / 3);
+	int col = (room % TileMap::NUM_ROOMS_COL) - 1;
+	int row = ((room - 1) / TileMap::NUM_ROOMS_ROW);
 	if(col < 0)
 	{
-		col = NUM_ROOMS_COL - 1;
+		col = TileMap::NUM_ROOMS_COL - 1;
 	}
 
 	bool connection = false;
@@ -205,33 +205,33 @@ vector<int> LevelMap::GetClosedConnections(int room, vector<int> closedRooms)
 
 		if(row == 0)
 		{
-			connections.push_back(room + NUM_ROOMS_COL);
+			connections.push_back(room + TileMap::NUM_ROOMS_COL);
 		}
-		else if(row == NUM_ROOMS_ROW - 1)
+		else if(row == TileMap::NUM_ROOMS_ROW - 1)
 		{
-			connections.push_back(room - NUM_ROOMS_COL);
+			connections.push_back(room - TileMap::NUM_ROOMS_COL);
 		}
 		else
 		{
-			connections.push_back(room + NUM_ROOMS_COL);
-			connections.push_back(room - NUM_ROOMS_COL);
+			connections.push_back(room + TileMap::NUM_ROOMS_COL);
+			connections.push_back(room - TileMap::NUM_ROOMS_COL);
 		}
 	}
-	else if(col == NUM_ROOMS_COL - 1)
+	else if(col == TileMap::NUM_ROOMS_COL - 1)
 	{
 		connections.push_back(room - 1);
 		if(row == 0)
 		{
-			connections.push_back(room + NUM_ROOMS_COL);
+			connections.push_back(room + TileMap::NUM_ROOMS_COL);
 		}
-		else if(row == NUM_ROOMS_ROW - 1)
+		else if(row == TileMap::NUM_ROOMS_ROW - 1)
 		{
-			connections.push_back(room - NUM_ROOMS_COL);
+			connections.push_back(room - TileMap::NUM_ROOMS_COL);
 		}
 		else
 		{
-			connections.push_back(room + NUM_ROOMS_COL);
-			connections.push_back(room - NUM_ROOMS_COL);
+			connections.push_back(room + TileMap::NUM_ROOMS_COL);
+			connections.push_back(room - TileMap::NUM_ROOMS_COL);
 		}
 	}
 	else
@@ -240,16 +240,16 @@ vector<int> LevelMap::GetClosedConnections(int room, vector<int> closedRooms)
 		connections.push_back(room + 1);
 		if(row == 0)
 		{
-			connections.push_back(room + NUM_ROOMS_COL);
+			connections.push_back(room + TileMap::NUM_ROOMS_COL);
 		}
-		else if(row == NUM_ROOMS_ROW)
+		else if(row == TileMap::NUM_ROOMS_ROW)
 		{
-			connections.push_back(room - NUM_ROOMS_COL);
+			connections.push_back(room - TileMap::NUM_ROOMS_COL);
 		}
 		else
 		{
-			connections.push_back(room + NUM_ROOMS_COL);
-			connections.push_back(room - NUM_ROOMS_COL);
+			connections.push_back(room + TileMap::NUM_ROOMS_COL);
+			connections.push_back(room - TileMap::NUM_ROOMS_COL);
 		}
 	}
 
@@ -262,4 +262,9 @@ vector<int> LevelMap::GetClosedConnections(int room, vector<int> closedRooms)
 	}
 
 	return closedConnections;
+}
+
+TileMap* LevelMap::GetMap()
+{
+	return m_p_Map;
 }

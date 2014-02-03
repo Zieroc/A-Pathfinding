@@ -6,6 +6,17 @@ GameObject::GameObject() : m_Position(Vector2(0, 0)), m_Velocity(Vector2(0, 0)),
 	m_p_Components[0] = new GraphicsComponent(); //Default Graphics Component
 	m_p_Components[1] = new PhysicsComponent(); //Default Physics Component
 	m_p_Components[2] = new InputComponent(); //Defualt Input Component
+	((InputComponent*)m_p_Components[2])->Initialize((PhysicsComponent*)m_p_Components[1]);
+}
+
+GameObject::GameObject(Vector2 position, int speed) : m_Velocity(Vector2(0, 0))
+{
+	m_Position = position;
+	m_Speed = speed;
+	m_p_Components[0] = new GraphicsComponent(); //Default Graphics Component
+	m_p_Components[1] = new PhysicsComponent(); //Default Physics Component
+	m_p_Components[2] = new InputComponent(); //Defualt Input Component
+	((InputComponent*)m_p_Components[2])->Initialize((PhysicsComponent*)m_p_Components[1]);
 }
 
 GameObject::~GameObject()
@@ -47,6 +58,16 @@ void GameObject::Initialize(Component* graphics, Component* physics, Component* 
 	AddComponent(input, 2);
 }
 
+void GameObject::InitializeGraphics(Sprite* sprites[])
+{
+	((GraphicsComponent*)m_p_Components[0])->Initialize(sprites, this);
+}
+
+void GameObject::InitializePhysics(TileMap* map)
+{
+	((PhysicsComponent*)m_p_Components[1])->Initialize(map, this);
+}
+
 void GameObject::HandleInput(InputHandler* input)
 {
 	((InputComponent*)m_p_Components[2])->Update(this, input);
@@ -55,13 +76,18 @@ void GameObject::HandleInput(InputHandler* input)
 void GameObject::Update(Uint32 timeElapsed)
 {
 	((GraphicsComponent*)m_p_Components[0])->Update(timeElapsed);
-	((PhysicsComponent*)m_p_Components[1])->Update(this, m_p_World);
+	((PhysicsComponent*)m_p_Components[1])->Update(this, timeElapsed);
 }
 
 
 void GameObject::Draw(SDL_Renderer* renderer, Camera* camera)
 {
 	((GraphicsComponent*)m_p_Components[0])->Draw(this, renderer, camera);
+}
+
+Component* GameObject::GetComponent(int type)
+{
+	return m_p_Components[type];
 }
 
 Vector2 GameObject::GetPosition()

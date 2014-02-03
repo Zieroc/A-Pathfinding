@@ -16,13 +16,19 @@ GraphicsComponent::~GraphicsComponent()
 	}
 }
 
-void GraphicsComponent::Initialize(Sprite* sprites[])
+void GraphicsComponent::Initialize(Sprite* sprites[], GameObject* gameObject)
 {
 	//If too many sprites were passed in just ignore them
 	for(int i = 0; i < MAX_SPRITE; i++)
 	{
-		m_p_Sprites[i] = sprites[i];
+		if(m_p_Sprites[i] != NULL)
+		{
+			m_p_Sprites[i] = sprites[i];
+		}
 	}
+
+	m_p_CurrentSprite = m_p_Sprites[0];
+	gameObject->SetBounds(m_p_CurrentSprite->GetTexture()->GetWidth(), m_p_CurrentSprite->GetTexture()->GetHeight());
 }
 
 void GraphicsComponent::Update(Uint32 timeElapsed)
@@ -32,7 +38,7 @@ void GraphicsComponent::Update(Uint32 timeElapsed)
 
 void GraphicsComponent::Draw(GameObject* gameObject, SDL_Renderer* renderer, Camera* camera)
 {
-	m_p_CurrentSprite->Draw(renderer, gameObject->GetPosition(), camera);
+	m_p_CurrentSprite->Draw(renderer, camera->LocationToScreen(gameObject->GetPosition()), camera);
 }
 
 void GraphicsComponent::Receive(int message)

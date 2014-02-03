@@ -19,6 +19,9 @@ Sprite::Sprite(CC_Texture* texture, int width, int height)
 
 	m_Animate = true;
 	m_Looping = true;
+
+	m_NumStates = 1;
+	m_CurrentState = 0;
 }
 
 Sprite::~Sprite()
@@ -62,4 +65,9 @@ void Sprite::Draw(SDL_Renderer* renderer, Vector2 position, Camera* camera)
     m_SourceRect.y = m_SourceRect.h * (m_CurrentState/ m_Columns);
 
 	SDL_RenderCopy(renderer, m_p_Texture->GetTexture(), &m_SourceRect, &m_DestinationRect);
+}
+
+CC_Texture* Sprite::GetTexture()
+{
+	return m_p_Texture;
 }

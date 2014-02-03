@@ -11,21 +11,22 @@
 
 using std::string;
 
-#define TILE_WIDTH 32
-#define TILE_HEIGHT 32
-#define ROOM_WIDTH 9
-#define ROOM_HEIGHT 9
-#define NUM_ROOMS_ROW 3
-#define NUM_ROOMS_COL 3
-#define NUM_ROOMS NUM_ROOMS_COL * NUM_ROOMS_ROW
-#define MAP_WIDTH ROOM_WIDTH * NUM_ROOMS_ROW
-#define MAP_HEIGHT ROOM_HEIGHT * NUM_ROOMS_COL
-#define DEFAULT_TILE 2
-#define NUMBER_OF_TILES 3
-
 class TileMap
 {
 public:
+	//MAP CONSTANTS
+	static const int TILE_WIDTH = 32;
+	static const int TILE_HEIGHT = 32;
+	static const int ROOM_WIDTH = 9;
+	static const int ROOM_HEIGHT = 9;
+	static const int NUM_ROOMS_ROW = 3;
+	static const int NUM_ROOMS_COL = 3;
+	static const int NUM_ROOMS = NUM_ROOMS_COL * NUM_ROOMS_ROW;
+	static const int MAP_WIDTH = ROOM_WIDTH * NUM_ROOMS_ROW;
+	static const int MAP_HEIGHT = ROOM_HEIGHT * NUM_ROOMS_COL;
+	static const int DEFAULT_TILE = 2;
+	static const int NUMBER_OF_TILES = 3;
+
 	TileMap(CC_Texture* tileSheet);
 	~TileMap();
 	int GetCellByPointX(int x); //Get x map cell for this pixel point

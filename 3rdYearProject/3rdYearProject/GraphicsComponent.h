@@ -14,7 +14,7 @@ class GraphicsComponent : public Component
 public:
 	GraphicsComponent();
 	virtual ~GraphicsComponent();
-	virtual void Initialize(Sprite* sprites[]);
+	virtual void Initialize(Sprite* sprites[], GameObject* gameObject);
 	virtual void Update(Uint32 timeElapsed);
 	virtual void Draw(GameObject* gameObject, SDL_Renderer* renderer, Camera* camera);
 	virtual void Receive(int message);

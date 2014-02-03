@@ -14,13 +14,17 @@ class GameObject
 {
 public:
 	GameObject();
+	GameObject(Vector2 position, int speed);
 	~GameObject();
 	void Send(int message);
 	void AddComponent(Component* component, int type);
 	void Initialize(Component* graphics, Component* physics, Component* input);
+	void InitializeGraphics(Sprite* sprites[]);
+	void InitializePhysics(TileMap* map);
 	void HandleInput(InputHandler* input);
 	void Update(Uint32 timeElapsed);
 	void Draw(SDL_Renderer* renderer, Camera* camera);
+	Component* GetComponent(int type);
 	Vector2 GetPosition();
 	Vector2 GetVelocity();
 	int GetSpeed();
@@ -36,7 +40,6 @@ private:
 	Vector2 m_Velocity;
 	int m_Speed;
 	SDL_Rect m_Bounds;
-	LevelMap* m_p_World; //Reference to the world this gameobject is in
 };
 
 #endif
