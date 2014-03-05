@@ -3,6 +3,7 @@
 
 GameObject::GameObject() : m_Position(Vector2(0, 0)), m_Velocity(Vector2(0, 0)), m_Speed(0)
 {
+	CalcBounds();
 	m_p_Components[0] = new GraphicsComponent(); //Default Graphics Component
 	m_p_Components[1] = new PhysicsComponent(); //Default Physics Component
 	m_p_Components[2] = new InputComponent(); //Defualt Input Component
@@ -13,6 +14,7 @@ GameObject::GameObject(Vector2 position, int speed) : m_Velocity(Vector2(0, 0))
 {
 	m_Position = position;
 	m_Speed = speed;
+	CalcBounds();
 	m_p_Components[0] = new GraphicsComponent(); //Default Graphics Component
 	m_p_Components[1] = new PhysicsComponent(); //Default Physics Component
 	m_p_Components[2] = new InputComponent(); //Defualt Input Component

@@ -85,8 +85,9 @@ void LevelMap::GenerateMap()
 			col = TileMap::NUM_ROOMS_COL - 1;
 		}
 		int lvl = rand() % 3 + 1;
+		//lvl = 1;
 		std::ostringstream ss;
-		ss << "data/Files/Room" << lvl << ".lvl";
+		ss << "data/Files/Room" << lvl << ".xml";
 		m_p_Map->LoadRoom(ss.str().c_str(), 0 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT));	
 	}
 
@@ -161,24 +162,24 @@ void LevelMap::OpenDoor(int dir, int col, int row)
 	switch(dir)
 	{
 	case 1:
-		m_p_Map->SetTileAtCell(3 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(4 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(5 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(3 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(4 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(5 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
 		break;
 	case 2:
-		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 3 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 4 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 5 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 3 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 4 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(TileMap::ROOM_WIDTH - 1 + (col * TileMap::ROOM_WIDTH), 5 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
 		break;
 	case 3:
-		m_p_Map->SetTileAtCell(3 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(4 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(5 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(3 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(4 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(5 + (col * TileMap::ROOM_WIDTH), TileMap::ROOM_HEIGHT - 1 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
 		break;
 	case 4:
-		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 3 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 4 + (row * TileMap::ROOM_HEIGHT), 1, true);
-		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 5 + (row * TileMap::ROOM_HEIGHT), 1, true);
+		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 3 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 4 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
+		m_p_Map->SetTileAtCell(0 + (col * TileMap::ROOM_WIDTH), 5 + (row * TileMap::ROOM_HEIGHT), 1, true, 0);
 		break;
 	default:
 		break;

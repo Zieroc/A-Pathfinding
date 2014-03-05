@@ -1,15 +1,13 @@
 #include "Tilemap.h"
-
+#include <vector>
 
 TileMap::TileMap(CC_Texture* tileSheet)
 {
-	SetTileCollideInformation();
-
 	for(int i = 0; i < MAP_WIDTH; i++)
 	{
 		for(int j = 0; j < MAP_HEIGHT; j++)
 		{
-			m_p_MapCells[i][j] = new Tile(DEFAULT_TILE, true, i, j);
+			m_p_MapCells[i][j] = new Tile(DEFAULT_TILE, true, i, j, 0);
 		}
 	}
 
@@ -76,10 +74,11 @@ Tile* TileMap::GetTileAtPoint(int x, int y)
 	return m_p_MapCells[GetCellByPointX(x)][GetCellByPointY(y)];
 }
 
-void TileMap::SetTileAtCell(int x, int y, int index, bool passable)
+void TileMap::SetTileAtCell(int x, int y, int index, bool passable, int code)
 {
 	GetTileAtCell(x, y)->SetIndex(index);
 	GetTileAtCell(x, y)->SetPassable(passable);
+	GetTileAtCell(x, y)->SetCode(code);
 }
 
 void TileMap::Draw(SDL_Renderer* renderer, Camera* camera)
@@ -111,76 +110,58 @@ void TileMap::Draw(SDL_Renderer* renderer, Camera* camera)
 	}
 }
 
-void TileMap::LoadMap(string fileName)
+void TileMap::LoadMap(const char* fileName)
 {
-	int data[MAP_WIDTH][MAP_HEIGHT];
-	std::ifstream file;
+	TileDAO tileDAO;
+	std::vector<Tile*> tiles = tileDAO.Read(fileName);
+	int tile = 0;
 
-	file.open(fileName);
-
-	if(!file)
-	{
-		DEBUG_MSG("ERROR LOADING LEVEL FILE");
-	}
-
-	for(int i = 0; i < MAP_WIDTH; i++)
+	for(int i = 0; i <  MAP_WIDTH; i++)
 	{
 		for(int j = 0; j < MAP_HEIGHT; j++)
 		{
-			if (!(file >> data[i][j])) 
+			if(tile < tiles.size())
 			{
-				DEBUG_MSG("Error reading file");
-				break;
+				m_p_MapCells[i][j]->SetIndex(tiles[tile]->GetIndex());
+				m_p_MapCells[i][j]->SetPassable(tiles[tile]->GetPassable());
+				m_p_MapCells[i][j]->SetCode(tiles[tile]->GetCode());
+				tile++;
 			}
 		}
-		if (!file) break;
 	}
-	file.close();
 
-	for(int i = 0; i < MAP_WIDTH; i++)
+	for(std::vector<Tile*>::const_iterator iter = tiles.begin(); iter != tiles.end(); ++iter)
 	{
-		for(int j = 0; j < MAP_HEIGHT; j++)
-		{
-			m_p_MapCells[i][j]->SetIndex(data[i][j]);
-			m_p_MapCells[i][j]->SetPassable(m_TileCollideInfo[data[i][j]]); //Get passable information from collide array
-		}
+		delete *iter;
 	}
+	tiles.clear();
 }
 
-void TileMap::LoadRoom(string fileName, int xOffset, int yOffset)
+void TileMap::LoadRoom(const char* fileName, int xOffset, int yOffset)
 {
-	int data[ROOM_WIDTH][ROOM_HEIGHT];
-	std::ifstream file;
-
-	file.open(fileName);
-
-	if(!file)
-	{
-		DEBUG_MSG("ERROR LOADING LEVEL FILE");
-	}
-
-	for(int i = 0; i < ROOM_WIDTH; i++)
-	{
-		for(int j = 0; j < ROOM_HEIGHT; j++)
-		{
-			if (!(file >> data[i][j])) 
-			{
-				DEBUG_MSG("Error reading file");
-				break;
-			}
-		}
-		if (!file) break;
-	}
-	file.close();
+	TileDAO tileDAO;
+	std::vector<Tile*> tiles = tileDAO.Read(fileName);
+	int tile = 0;
 
 	for(int i = 0; i <  ROOM_WIDTH; i++)
 	{
 		for(int j = 0; j < ROOM_HEIGHT; j++)
 		{
-			m_p_MapCells[i + xOffset][j + yOffset]->SetIndex(data[i][j]);
-			m_p_MapCells[i + xOffset][j + yOffset]->SetPassable(m_TileCollideInfo[data[i][j]]); //Get passable information from collide array
+			if(tile < tiles.size())
+			{
+				m_p_MapCells[i + xOffset][j + yOffset]->SetIndex(tiles[tile]->GetIndex());
+				m_p_MapCells[i + xOffset][j + yOffset]->SetPassable(tiles[tile]->GetPassable());
+				m_p_MapCells[i + xOffset][j + yOffset]->SetCode(tiles[tile]->GetCode());
+				tile++;
+			}
 		}
 	}
+
+	for(std::vector<Tile*>::const_iterator iter = tiles.begin(); iter != tiles.end(); ++iter)
+	{
+		delete *iter;
+	}
+	tiles.clear();
 }
 
 void TileMap::ClearMap()
@@ -208,26 +189,4 @@ SDL_Rect TileMap::TileSourceRectangle(int index)
 	source.w = TILE_WIDTH;
 	source. h = TILE_HEIGHT;
 	return source;
-}
-
-void TileMap::SetTileCollideInformation()
-{
-	std::ifstream file;
-
-	file.open("data/Files/TileCollision.data");
-
-	if(!file)
-	{
-		DEBUG_MSG("ERROR LOADING DATA FILE");
-	}
-
-	for(int i = 0; i < NUMBER_OF_TILES; i++)
-	{
-		if (!(file >> m_TileCollideInfo[i])) 
-		{
-			DEBUG_MSG("Error reading file");
-			break;
-		}
-	}
-	file.close();
 }

@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include "Camera.h"
 #include "CC_Texture.h"
+#include "TileDAO.h"
 #include <iostream>
 #include <fstream>
 #include <iterator>
@@ -35,18 +36,16 @@ public:
 	bool IsCellPassableByPoint(int x, int y);
 	Tile* GetTileAtCell(int x, int y);
 	Tile* GetTileAtPoint(int x, int y);
-	void SetTileAtCell(int x, int y, int index, bool passable);
+	void SetTileAtCell(int x, int y, int index, bool passable, int code);
 	void Draw(SDL_Renderer* renderer, Camera* camera);
-	void LoadMap(string fileName);
-	void LoadRoom(string fileName, int xOffset, int yOffset);
+	void LoadMap(const char* fileName);
+	void LoadRoom(const char* fileName, int xOffset, int yOffset);
 	void ClearMap();
 private:
 	Tile* m_p_MapCells[MAP_WIDTH][MAP_HEIGHT];
-	int m_TileCollideInfo[NUMBER_OF_TILES];
 	CC_Texture* m_p_TileSheet;
 	int TilesPerRow();
 	SDL_Rect TileSourceRectangle(int index);
-	void SetTileCollideInformation();
 };
 
 #endif

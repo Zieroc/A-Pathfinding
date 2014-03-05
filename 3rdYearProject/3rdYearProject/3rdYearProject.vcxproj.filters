@@ -73,6 +73,12 @@
     <Filter Include="Source Files\AI">
       <UniqueIdentifier>{a2e44569-c162-4ff4-84af-556c03db04e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DAOs">
+      <UniqueIdentifier>{ad6e44db-6365-44c1-be9e-aa23c54adb0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DAOs">
+      <UniqueIdentifier>{2917b8b3-4383-4bc4-a0a6-33f72718cb87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -138,11 +144,17 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TempInput.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Pathfinder.h">
       <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PathNode.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="TileDAO.h">
+      <Filter>Header Files\DAOs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,11 +218,17 @@
     <ClCompile Include="GraphicsComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="TempInput.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Pathfinder.cpp">
       <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PathNode.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="TileDAO.cpp">
+      <Filter>Source Files\DAOs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -91,14 +91,16 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LevelMap.h" />
     <ClInclude Include="Pathfinder.h" />
+    <ClInclude Include="PathNode.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="TempInput.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileDAO.h" />
     <ClInclude Include="Tilemap.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,14 +117,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="Pathfinder.cpp" />
+    <ClCompile Include="PathNode.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TempInput.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileDAO.cpp" />
     <ClCompile Include="Tilemap.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>

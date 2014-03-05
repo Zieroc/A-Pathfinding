@@ -149,10 +149,10 @@ void PhysicsComponent::VerticalTileCollisionTest(GameObject* gameObject)
 		if(gameObject->GetVelocity().y < 0)
 		{
 			corner1.x = movedBounds.x + 1;
-			corner1.y = movedBounds.y;
+			corner1.y = movedBounds.y + 1;
 
 			corner2.x = movedBounds.x + movedBounds.w - 1;
-			corner2.y = movedBounds.y;
+			corner2.y = movedBounds.y + 1;
 		}
 		else
 		{

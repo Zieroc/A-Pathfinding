@@ -18,11 +18,12 @@ public:
 	bool FindPath(Tile* start, Tile* end);
 	Vector2 GetNextNode();
 private:
+	Pathfinder();
 	vector<Tile*> openList;
 	vector<Tile*> closedList;
 	forward_list<Vector2> m_Path;
 	TileMap* m_p_Map;
-	Tile* m_SelectedSquare;
+	Tile* m_p_SelectedSquare;
 };
 
 #endif

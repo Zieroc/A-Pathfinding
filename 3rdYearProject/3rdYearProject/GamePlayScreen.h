@@ -24,6 +24,7 @@ private:
 	LevelMap* m_p_Map;
 	bool pressed;
 	GameObject* m_p_Object;
+	GameObject* m_p_Object2;
 };
 
 #endif
