@@ -4,10 +4,6 @@
 GameObject::GameObject() : m_Position(Vector2(0, 0)), m_Velocity(Vector2(0, 0)), m_Speed(0)
 {
 	CalcBounds();
-	m_p_Components[0] = new GraphicsComponent(); //Default Graphics Component
-	m_p_Components[1] = new PhysicsComponent(); //Default Physics Component
-	m_p_Components[2] = new InputComponent(); //Defualt Input Component
-	((InputComponent*)m_p_Components[2])->Initialize((PhysicsComponent*)m_p_Components[1]);
 }
 
 GameObject::GameObject(Vector2 position, int speed) : m_Velocity(Vector2(0, 0))
@@ -15,81 +11,42 @@ GameObject::GameObject(Vector2 position, int speed) : m_Velocity(Vector2(0, 0))
 	m_Position = position;
 	m_Speed = speed;
 	CalcBounds();
-	m_p_Components[0] = new GraphicsComponent(); //Default Graphics Component
-	m_p_Components[1] = new PhysicsComponent(); //Default Physics Component
-	m_p_Components[2] = new InputComponent(); //Defualt Input Component
-	((InputComponent*)m_p_Components[2])->Initialize((PhysicsComponent*)m_p_Components[1]);
 }
 
 GameObject::~GameObject()
 {
-	for(int i = 0; i < MAX_COMPONENTS; i++)
+	for(int i = 0; i < MAX_SPRITE; i++)
 	{
-		if(m_p_Components[i] != NULL)
+		if(m_p_Sprites[i] != NULL)
 		{
-			delete(m_p_Components[i]);
+			delete(m_p_Sprites[i]);
 		}
 	}
 }
 
-void GameObject::Send(int message)
+void GameObject::Initialize(Sprite* sprites[])
 {
-	for (int i = 0; i < MAX_COMPONENTS; i++)
-    {
-      if (m_p_Components[i] != NULL)
-      {
-        m_p_Components[i]->Receive(message);
-      }
-    }
-}
-
-void GameObject::AddComponent(Component* component, int type)
-{
-	if(m_p_Components[type] != NULL)
+	for(int i = 0; i < MAX_SPRITE; i++)
 	{
-		delete(m_p_Components[type]);
+		if(m_p_Sprites[i] != NULL)
+		{
+			m_p_Sprites[i] = sprites[i];
+		}
 	}
 
-	m_p_Components[type] = component;
-}
-
-void GameObject::Initialize(Component* graphics, Component* physics, Component* input)
-{
-	AddComponent(graphics, 0);
-	AddComponent(physics, 1);
-	AddComponent(input, 2);
-}
-
-void GameObject::InitializeGraphics(Sprite* sprites[])
-{
-	((GraphicsComponent*)m_p_Components[0])->Initialize(sprites, this);
-}
-
-void GameObject::InitializePhysics(TileMap* map)
-{
-	((PhysicsComponent*)m_p_Components[1])->Initialize(map, this);
-}
-
-void GameObject::HandleInput(InputHandler* input)
-{
-	((InputComponent*)m_p_Components[2])->Update(this, input);
+	m_p_CurrentSprite = m_p_Sprites[0];
+	SetBounds(m_p_CurrentSprite->GetTexture()->GetWidth(), m_p_CurrentSprite->GetTexture()->GetHeight());
 }
 
 void GameObject::Update(Uint32 timeElapsed)
 {
-	((GraphicsComponent*)m_p_Components[0])->Update(timeElapsed);
-	((PhysicsComponent*)m_p_Components[1])->Update(this, timeElapsed);
+	m_p_CurrentSprite->Update(timeElapsed);
 }
 
 
 void GameObject::Draw(SDL_Renderer* renderer, Camera* camera)
 {
-	((GraphicsComponent*)m_p_Components[0])->Draw(this, renderer, camera);
-}
-
-Component* GameObject::GetComponent(int type)
-{
-	return m_p_Components[type];
+	m_p_CurrentSprite->Draw(renderer, camera->LocationToScreen(GetPosition()), camera);
 }
 
 Vector2 GameObject::GetPosition()

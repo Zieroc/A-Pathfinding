@@ -6,7 +6,7 @@
 class InputHandler
 {
 public:
-	enum MouseButton {LeftButton = 1, RightButton};
+	enum MouseButton {LeftButton = 1, MiddleButton, RightButton};
 	InputHandler();
 	~InputHandler();
 	void Update();
