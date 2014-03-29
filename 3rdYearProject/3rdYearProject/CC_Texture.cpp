@@ -1,6 +1,12 @@
 #include "CC_Texture.h"
 #include <iostream>
 
+CC_Texture::CC_Texture(SDL_Texture* texture)
+{
+	m_p_Texture = texture;
+
+	SDL_QueryTexture(m_p_Texture, NULL, NULL, &m_Width, &m_Height);
+}
 
 CC_Texture::CC_Texture(SDL_Renderer* renderer, const char* filepath)
 {

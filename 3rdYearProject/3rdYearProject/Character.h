@@ -18,6 +18,10 @@ public:
 	void FillHealth();
 	void IncHealth(int amount);
 	void DecHealth(int amount);
+	int GetCurrentAP();
+	int GetMaxAP();
+	int GetCurrentHealth();
+	int GetMaxHealth();
 protected:
 	void HorizontalTileCollisionTest();
 	void VerticalTileCollisionTest();

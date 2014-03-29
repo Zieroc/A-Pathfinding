@@ -12,7 +12,7 @@ public:
 	Sprite(CC_Texture* texture, int width, int height);
 	~Sprite();
 	void Update(Uint32 timeElapsed);
-	void Draw(SDL_Renderer* renderer, Vector2 position, Camera* camera);
+	void Draw(SDL_Renderer* renderer, Vector2 position);
 	CC_Texture* GetTexture();
 private:
 	CC_Texture* m_p_Texture;

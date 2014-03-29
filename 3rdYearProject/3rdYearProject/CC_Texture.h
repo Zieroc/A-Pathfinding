@@ -7,6 +7,7 @@
 class CC_Texture
 {
 public:
+	CC_Texture(SDL_Texture* texture);
 	CC_Texture(SDL_Renderer* renderer, const char* filepath);
 	~CC_Texture();
 	int GetWidth();

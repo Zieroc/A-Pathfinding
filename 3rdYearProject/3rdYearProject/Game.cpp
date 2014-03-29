@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "GamePlayScreen.h"
+#include "StartScreen.h"
 #include <iostream>
 
 
@@ -14,7 +14,7 @@ Game::Game()
 	levelRect.y = 0;
 	levelRect.w = 27 * 32;
 	levelRect.h = 27 * 32;
-	m_p_Camera = new Camera(Vector2(0, 0), Vector2(800, 600), levelRect);
+	m_p_Camera = new Camera(Vector2(0, 0), Vector2(800, 500), levelRect);
 }
 
 Game::~Game()
@@ -54,6 +54,13 @@ bool Game::Initialize(const char* title, int x, int y, int width, int height, in
 				DEBUG_MSG("Audio Initialisation Failed");
 				return false; 
 			}
+
+			//Initialise TTF Fonts
+			if(TTF_Init() == -1)
+			{
+				DEBUG_MSG("TTF Initialisation Failed");
+				return false;
+			}
 		}
 		else
 		{
@@ -63,7 +70,7 @@ bool Game::Initialize(const char* title, int x, int y, int width, int height, in
 
 		m_p_ContentManager = new ContentManager(m_p_Renderer);
 		m_p_ScreenManager = new ScreenManager(m_p_Renderer, m_p_ContentManager, m_p_Camera);
-		m_p_ScreenManager->AddScreen(new GameplayScreen(), false);
+		m_p_ScreenManager->AddScreen(new StartScreen(), false);
 		return true;
 	}
 	else

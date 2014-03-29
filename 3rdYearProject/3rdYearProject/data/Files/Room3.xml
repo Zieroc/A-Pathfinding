@@ -112,7 +112,7 @@
 	<Tile>
 		<Index>1</Index>
 		<Passable>1</Passable>
-		<Code>0</Code>
+		<Code>1</Code>
 	</Tile>
 	<Tile>
 		<Index>1</Index>
@@ -247,7 +247,7 @@
 	<Tile>
 		<Index>1</Index>
 		<Passable>1</Passable>
-		<Code>0</Code>
+		<Code>1</Code>
 	</Tile>
 	<Tile>
 		<Index>1</Index>
@@ -342,7 +342,7 @@
 	<Tile>
 		<Index>1</Index>
 		<Passable>1</Passable>
-		<Code>0</Code>
+		<Code>1</Code>
 	</Tile>
 	<Tile>
 		<Index>0</Index>

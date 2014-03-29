@@ -38,8 +38,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\SDL2_mixer-2.0.0\include;$(SolutionDir)\SDL2_image-2.0.0\include;$(SolutionDir)\SDL2-2.0.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SDL2_mixer-2.0.0\lib\x86;$(SolutionDir)\SDL2_image-2.0.0\lib\x86;$(SolutionDir)\SDL2-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\SDL2_ttf-2.0.12\include;$(SolutionDir)\SDL2_mixer-2.0.0\include;$(SolutionDir)\SDL2_image-2.0.0\include;$(SolutionDir)\SDL2-2.0.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\SDL2_mixer-2.0.0\lib\x86;$(SolutionDir)\SDL2_image-2.0.0\lib\x86;$(SolutionDir)\SDL2_ttf-2.0.12\lib\x86;$(SolutionDir)\SDL2-2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)\SDL2_mixer-2.0.0\include;$(SolutionDir)\SDL2_image-2.0.0\include;$(SolutionDir)\SDL2-2.0.0\include;$(IncludePath)</IncludePath>
@@ -56,8 +56,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2_mixer-2.0.0\lib\x86;$(SolutionDir)\SDL2_image-2.0.0\lib\x86;$(SolutionDir)\SDL2-2.0.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2_ttf-2.0.12\lib\x86;$(SolutionDir)\SDL2_mixer-2.0.0\lib\x86;$(SolutionDir)\SDL2_image-2.0.0\lib\x86;$(SolutionDir)\SDL2-2.0.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,6 +83,7 @@
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -91,6 +92,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LevelMap.h" />
     <ClInclude Include="Action.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="PathNode.h" />
     <ClInclude Include="PlayerManager.h" />
@@ -98,6 +100,7 @@
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileDAO.h" />
     <ClInclude Include="Tilemap.h" />
@@ -105,11 +108,13 @@
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CC_Texture.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -126,6 +131,7 @@
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileDAO.cpp" />
     <ClCompile Include="Tilemap.cpp" />

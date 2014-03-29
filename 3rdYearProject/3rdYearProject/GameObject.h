@@ -4,7 +4,6 @@
 #include "Sprite.h"
 #include "TileMap.h"
 #include "Pathfinder.h"
-#include "InputHandler.h"
 #include "Vector2.h"
 #include <SDL.h>
 

@@ -79,6 +79,12 @@
     <Filter Include="Source Files\Character">
       <UniqueIdentifier>{cc6f8686-80c6-4277-9516-df5a3b288e04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Interface">
+      <UniqueIdentifier>{4c82b6a3-b18b-47e3-9583-702514fffec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interface">
+      <UniqueIdentifier>{b631d877-8347-4dfc-807b-01e03913cfcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -153,11 +159,20 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
     <ClInclude Include="EnemyManager.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StartScreen.h">
+      <Filter>Header Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,11 +248,20 @@
     <ClCompile Include="Character.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StartScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,11 @@
 #include "Character.h"
 
-Character::Character() : m_MaxAP(5), m_CurrentAP(5), m_HasPath(false), m_HasReachedTarget(false)
+Character::Character() : m_MaxAP(5), m_CurrentAP(5), m_HasPath(false), m_HasReachedTarget(false), m_MaxHealth(10), m_CurrentHealth(10)
 {
 	CalcBounds();
 }
 
-Character::Character(Vector2 position, int speed): m_MaxAP(5), m_CurrentAP(5), m_HasPath(false), m_HasReachedTarget(false)
+Character::Character(Vector2 position, int speed): m_MaxAP(5), m_CurrentAP(5), m_HasPath(false), m_HasReachedTarget(false), m_MaxHealth(10), m_CurrentHealth(10)
 {
 	m_Position = position;
 	m_Speed = speed;
@@ -54,46 +54,48 @@ void Character::Move(Uint32 timeElapsed)
 			{
 				//If we haven't got a path and aren't at the target we need to calculate the path
 				Vector2 start = GetPosition();
-				m_p_Pathfinder->FindPath(m_p_Map->GetTileAtPoint(start.x, start.y), m_p_Map->GetTileAtPoint(m_Target.x, m_Target.y));
-				m_Target = m_p_Pathfinder->GetNextNode();
-				m_HasPath = true;
-			}
-
-			Vector2 velocity(0, 0);
-
-			Vector2 pos = GetPosition();
-
-			if(pos.x < m_Target.x)
-			{
-				velocity.x = std::min(GetSpeed() * (timeElapsed / 1000.0f), m_Target.x - pos.x);
-			}
-			else if(pos.x > m_Target.x)
-			{
-				velocity.x = std::max(-GetSpeed() * (timeElapsed / 1000.0f), m_Target.x - pos.x);
-			}
-			if(pos.y < m_Target.y)
-			{
-				velocity.y = std::min(GetSpeed() * (timeElapsed / 1000.0f), m_Target.y - pos.y);
-			}
-			else if(pos.y > m_Target.y)
-			{
-				velocity.y = std::max(-GetSpeed() * (timeElapsed / 1000.0f), m_Target.y - pos.y);
-			}
-
-			SetVelocity(velocity);
-			HorizontalTileCollisionTest();
-			VerticalTileCollisionTest();
-
-			pos += GetVelocity();
-			SetPosition(pos);
-			CalcBounds();
-
-			if(GetPosition() == m_Target)
-			{
-				m_CurrentAP--;
+				m_HasPath = m_p_Pathfinder->FindPath(m_p_Map->GetTileAtPoint(start.x, start.y), m_p_Map->GetTileAtPoint(m_Target.x, m_Target.y));
 				GetPathNode();
 			}
-		}	
+
+			if(m_HasPath)
+			{
+				Vector2 velocity(0, 0);
+
+				Vector2 pos = GetPosition();
+
+				if(pos.x < m_Target.x)
+				{
+					velocity.x = std::min(GetSpeed() * (timeElapsed / 1000.0f), m_Target.x - pos.x);
+				}
+				else if(pos.x > m_Target.x)
+				{
+					velocity.x = std::max(-GetSpeed() * (timeElapsed / 1000.0f), m_Target.x - pos.x);
+				}
+				if(pos.y < m_Target.y)
+				{
+					velocity.y = std::min(GetSpeed() * (timeElapsed / 1000.0f), m_Target.y - pos.y);
+				}
+				else if(pos.y > m_Target.y)
+				{
+					velocity.y = std::max(-GetSpeed() * (timeElapsed / 1000.0f), m_Target.y - pos.y);
+				}
+
+				SetVelocity(velocity);
+				HorizontalTileCollisionTest();
+				VerticalTileCollisionTest();
+
+				pos += GetVelocity();
+				SetPosition(pos);
+				CalcBounds();
+
+				if(GetPosition() == m_Target)
+				{
+					m_CurrentAP--;
+					GetPathNode();
+				}
+			}
+		}
 		else
 		{
 			//NO AP SO STOP MOVING
@@ -133,9 +135,28 @@ void Character::DecHealth(int amount)
 	m_CurrentHealth -= amount;
 }
 
+int Character::GetCurrentAP()
+{
+	return m_CurrentAP;
+}
+
+int Character::GetMaxAP()
+{
+	return m_MaxAP;
+}
+
+int Character::GetCurrentHealth()
+{
+	return m_CurrentHealth;
+}
+
+int Character::GetMaxHealth()
+{
+	return m_MaxHealth;
+}
+
 void Character::GetPathNode()
 {
-
 	m_HasReachedTarget = true;
 
 	m_Target = m_p_Pathfinder->GetNextNode();

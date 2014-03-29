@@ -54,7 +54,7 @@ void ScreenManager::Update(Uint32 timeElapsed)
     while (!m_p_UpdateScreens.empty())
     {
         //Get the screen and the remove it from the update list
-        GameScreen* screen = m_p_Screens.front();
+        GameScreen* screen = m_p_UpdateScreens.front();
         m_p_UpdateScreens.pop_front();
 
         // Update the screen.
@@ -114,7 +114,10 @@ void ScreenManager::RemoveScreen()
 		m_p_Screens.front()->UnloadContent();
 		delete(m_p_Screens.front());
 		m_p_Screens.pop_front();
-		m_p_Screens.front()->SetCovered(false);
+		if(!m_p_Screens.empty())
+		{
+			m_p_Screens.front()->SetCovered(false);
+		}
 	}
 }
 

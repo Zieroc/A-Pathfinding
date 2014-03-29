@@ -46,7 +46,7 @@ void GameObject::Update(Uint32 timeElapsed)
 
 void GameObject::Draw(SDL_Renderer* renderer, Camera* camera)
 {
-	m_p_CurrentSprite->Draw(renderer, camera->LocationToScreen(GetPosition()), camera);
+	m_p_CurrentSprite->Draw(renderer, camera->LocationToScreen(GetPosition()));
 }
 
 Vector2 GameObject::GetPosition()

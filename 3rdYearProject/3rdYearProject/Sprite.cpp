@@ -56,7 +56,7 @@ void Sprite::Update(Uint32 timeElapsed)
     }
 }
 
-void Sprite::Draw(SDL_Renderer* renderer, Vector2 position, Camera* camera)
+void Sprite::Draw(SDL_Renderer* renderer, Vector2 position)
 {
 	m_DestinationRect.x = position.x;
 	m_DestinationRect.y = position.y;

@@ -2,6 +2,7 @@
 
 PlayerManager::PlayerManager()
 {
+	m_Clicked = false;
 }
 
 PlayerManager::~PlayerManager()
@@ -28,6 +29,39 @@ void PlayerManager::Draw(SDL_Renderer* renderer, Camera* camera)
 	}
 }
 
+Character* PlayerManager::HandleInput(InputHandler* input)
+{
+	if(input->MousePressed(input->LeftButton))
+	{
+		if(!m_Clicked)
+		{
+			
+			SDL_Rect mouse;
+			mouse.x = input->GetMouseX();
+			mouse.y = input->GetMouseY();
+			mouse.w = 8;
+			mouse.h = 8;
+			
+			m_Clicked = true;
+
+			for(int i = 0; i < m_p_Players.size(); i++)
+			{
+				if(SDL_HasIntersection(&mouse, &m_p_Players[i]->GetBounds()))
+				{
+					return m_p_Players[i];
+				}
+			}
+		}
+	}
+	else
+	{
+		m_Clicked = false;
+	}
+
+	return NULL;
+
+};
+
 void PlayerManager::AddPlayer(Character* player)
 {
 	m_p_Players.push_back(player);
@@ -50,4 +84,9 @@ void PlayerManager::FillAP()
 	{
 		m_p_Players[i]->FillAP();
 	}
+}
+
+std::vector<Character*> PlayerManager::GetPlayers()
+{
+	return m_p_Players;
 }

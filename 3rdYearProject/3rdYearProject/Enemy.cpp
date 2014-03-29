@@ -17,7 +17,7 @@ Enemy::~Enemy()
 }
 
 
-void Enemy::Initialize(Sprite* sprites[], TileMap* map, Character* playerRef)
+void Enemy::Initialize(Sprite* sprites[], TileMap* map, PlayerManager* playerRef)
 {
 	Character::Initialize(sprites, map);
 	m_p_PlayerRef = playerRef;
@@ -41,7 +41,7 @@ void Enemy::Update(Uint32 timeElapsed, int turn)
 		{
 			if(!m_HasPath)
 			{
-				SetTarget(m_p_PlayerRef->GetPosition());
+				SetTarget(m_p_PlayerRef->GetPlayer(0)->GetPosition());
 			}
 		}
 		Move(timeElapsed);
@@ -57,6 +57,10 @@ void Enemy::GetPathNode()
 	if(m_Target.x < 0 || m_Target == m_TargetPlayerPos)
 	{
 		m_HasPath = false;
+		while(m_p_Pathfinder->GetNextNode().x > 0)
+		{
+			//Run through the path if we have stopped short on the player to remove all the nodes
+		}
 	}
 	else
 	{
