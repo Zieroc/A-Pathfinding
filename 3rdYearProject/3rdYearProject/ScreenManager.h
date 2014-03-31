@@ -26,6 +26,8 @@ public:
 	void AddPopup(GameScreen* popup);
 	void RemoveScreen(); //Removes the last added screen
 	Camera* GetCamera();
+	bool GetRunning();
+	void SetRunning(bool running);
 private:
 	forward_list<GameScreen*> m_p_Screens;
 	forward_list<GameScreen*> m_p_UpdateScreens;
@@ -33,6 +35,7 @@ private:
 	ContentManager* m_p_ContentManager;
 	SDL_Renderer* m_p_Renderer;
 	Camera* m_p_Camera;
+	bool m_Running;
 };
 
 #endif

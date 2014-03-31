@@ -35,18 +35,32 @@ void GameObject::Initialize(Sprite* sprites[])
 	}
 
 	m_p_CurrentSprite = m_p_Sprites[0];
+	spriteIndex = 0;
 	SetBounds(m_p_CurrentSprite->GetTexture()->GetWidth(), m_p_CurrentSprite->GetTexture()->GetHeight());
 }
 
 void GameObject::Update(Uint32 timeElapsed)
 {
 	m_p_CurrentSprite->Update(timeElapsed);
+
+	if(m_p_CurrentSprite->GetFinished())
+	{
+		SwitchAnimation(0);
+	}
 }
 
 
 void GameObject::Draw(SDL_Renderer* renderer, Camera* camera)
 {
-	m_p_CurrentSprite->Draw(renderer, camera->LocationToScreen(GetPosition()));
+	Vector2 position = camera->LocationToScreen(GetPosition());
+
+	if(spriteIndex != 0)
+	{
+		position.x -= 7;
+		position.y -= 4;
+	}
+	
+	m_p_CurrentSprite->Draw(renderer, position);
 }
 
 Vector2 GameObject::GetPosition()
@@ -94,4 +108,11 @@ void GameObject::CalcBounds()
 {
 	m_Bounds.x = m_Position.x;
 	m_Bounds.y = m_Position.y;
+}
+
+void GameObject::SwitchAnimation(int animation)
+{
+	m_p_CurrentSprite = m_p_Sprites[animation];
+	m_p_CurrentSprite->ResetAnimation();
+	spriteIndex = animation;
 }

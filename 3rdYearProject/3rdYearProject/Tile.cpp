@@ -9,6 +9,7 @@ Tile::Tile(int index, bool passable, int xCell, int yCell, int code)
 	m_YCell = yCell;
 	m_p_Node = new PathNode(this);
 	m_Code = code;
+	m_Occupied = false;
 }
 
 Tile::Tile()
@@ -18,6 +19,7 @@ Tile::Tile()
 	m_XCell = 0;
 	m_YCell = 0;
 	m_p_Node = new PathNode(this);
+	m_Occupied = false;
 }
 
 Tile::~Tile()
@@ -68,4 +70,14 @@ int Tile::GetCode()
 void Tile::SetCode(int code)
 {
 	m_Code = code;
+}
+
+void Tile::SetOccupied(bool occupied)
+{
+	m_Occupied = occupied;
+}
+
+bool Tile::GetOccupied()
+{
+	return m_Occupied;
 }

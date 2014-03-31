@@ -89,12 +89,15 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePlayScreen.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="HowToPlayScreen.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelMap.h" />
-    <ClInclude Include="Action.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="LoseScreen.h" />
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="PathNode.h" />
+    <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="ScreenManager.h" />
@@ -106,6 +109,7 @@
     <ClInclude Include="Tilemap.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="WinScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
@@ -120,12 +124,15 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePlayScreen.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="HowToPlayScreen.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMap.cpp" />
+    <ClCompile Include="LoseScreen.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Pathfinder.cpp" />
     <ClCompile Include="PathNode.cpp" />
+    <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
@@ -137,9 +144,7 @@
     <ClCompile Include="Tilemap.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Vector2.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <ClCompile Include="WinScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

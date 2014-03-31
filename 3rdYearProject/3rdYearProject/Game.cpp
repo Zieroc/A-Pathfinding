@@ -91,6 +91,8 @@ void Game::Update()
 {
 	m_p_ScreenManager->Update(GetTimeElapsed());
 	m_LastTime = SDL_GetTicks(); //Update time
+
+	m_Running = m_p_ScreenManager->GetRunning();
 }
 
 void Game::HandleEvents()

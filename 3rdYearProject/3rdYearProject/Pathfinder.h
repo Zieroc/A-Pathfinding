@@ -17,6 +17,7 @@ public:
 	int CalculateH(Tile* current, Tile* target);
 	bool FindPath(Tile* start, Tile* end);
 	Vector2 GetNextNode();
+	void ClearNodes(); //Reset all Nodes to default
 private:
 	Pathfinder();
 	vector<Tile*> openList;

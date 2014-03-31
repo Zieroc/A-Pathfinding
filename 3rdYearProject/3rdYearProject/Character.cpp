@@ -1,11 +1,11 @@
 #include "Character.h"
 
-Character::Character() : m_MaxAP(5), m_CurrentAP(5), m_HasPath(false), m_HasReachedTarget(false), m_MaxHealth(10), m_CurrentHealth(10)
+Character::Character() : m_MaxAP(10), m_CurrentAP(10), m_HasPath(false), m_HasReachedTarget(false), m_MaxHealth(20), m_CurrentHealth(20)
 {
 	CalcBounds();
 }
 
-Character::Character(Vector2 position, int speed): m_MaxAP(5), m_CurrentAP(5), m_HasPath(false), m_HasReachedTarget(false), m_MaxHealth(10), m_CurrentHealth(10)
+Character::Character(Vector2 position, int speed): m_MaxAP(10), m_CurrentAP(10), m_HasPath(false), m_HasReachedTarget(false), m_MaxHealth(20), m_CurrentHealth(20)
 {
 	m_Position = position;
 	m_Speed = speed;
@@ -16,11 +16,14 @@ Character::~Character()
 {
 }
 
-void Character::Initialize(Sprite* sprites[], TileMap* map)
+void Character::Initialize(Sprite* sprites[], TileMap* map, SoundManager* soundMan)
 {
 	GameObject::Initialize(sprites);
 
+	m_p_SoundManager = soundMan;
+
 	m_p_Map = map;
+	m_p_Map->GetTileAtPoint(m_Position.x, m_Position.y)->SetOccupied(true);
 	m_Target = GetPosition();
 	m_HasReachedTarget = true;
 
@@ -39,9 +42,12 @@ void Character::Update(Uint32 timeElapsed, int turn)
 
 void Character::SetTarget(Vector2 target)
 {
-	m_Target = target;
-	m_HasReachedTarget = false;
-	m_HasPath = false;
+	if(!(((int)target.x / TileMap::TILE_WIDTH == (int)m_Position.x / TileMap::TILE_WIDTH) && ((int)target.y / TileMap::TILE_HEIGHT == (int)m_Position.y / TileMap::TILE_HEIGHT)))
+	{
+		m_Target = target;
+		m_HasReachedTarget = false;
+		m_HasPath = false;
+	}
 }
 
 void Character::Move(Uint32 timeElapsed)
@@ -60,6 +66,11 @@ void Character::Move(Uint32 timeElapsed)
 
 			if(m_HasPath)
 			{
+				if(m_p_Map->GetTileAtPoint(m_Position.x, m_Position.y)->GetOccupied())
+				{
+					m_p_Map->GetTileAtPoint(m_Position.x, m_Position.y)->SetOccupied(false);
+				}
+
 				Vector2 velocity(0, 0);
 
 				Vector2 pos = GetPosition();
@@ -93,6 +104,7 @@ void Character::Move(Uint32 timeElapsed)
 				{
 					m_CurrentAP--;
 					GetPathNode();
+					m_p_Map->GetTileAtPoint(m_Position.x, m_Position.y)->SetOccupied(true);
 				}
 			}
 		}
@@ -101,6 +113,9 @@ void Character::Move(Uint32 timeElapsed)
 			//NO AP SO STOP MOVING
 			m_HasReachedTarget = true;
 			m_HasPath = false;
+			while(m_p_Pathfinder->GetNextNode().x >= 0)
+			{
+			}
 		}
 	}
 }
@@ -132,6 +147,7 @@ void Character::IncHealth(int amount)
 
 void Character::DecHealth(int amount)
 {
+	m_p_SoundManager->PlaySoundEffect("hit.wav");
 	m_CurrentHealth -= amount;
 }
 
@@ -155,6 +171,11 @@ int Character::GetMaxHealth()
 	return m_MaxHealth;
 }
 
+void Character::UnoccupyMap()
+{
+	m_p_Map->GetTileAtPoint(m_Position.x, m_Position.y)->SetOccupied(false);
+}
+
 void Character::GetPathNode()
 {
 	m_HasReachedTarget = true;
@@ -169,6 +190,7 @@ void Character::GetPathNode()
 		m_HasPath = false;
 	}
 }
+
 void Character::HorizontalTileCollisionTest()
 {
 	if(!GetVelocity().x == 0) //If we aren't moving horizontally we can't collide with the map horizontally so only check if we have a horizontally velcoity

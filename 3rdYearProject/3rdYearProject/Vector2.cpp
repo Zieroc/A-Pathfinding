@@ -1,4 +1,5 @@
 #include "Vector2.h"
+#include <cmath>
 
 Vector2::Vector2()
 {
@@ -33,6 +34,15 @@ void Vector2::Clamp(Vector2 lowBounds, Vector2 highBounds)
 	{
 		y = highBounds.y;
 	}
+}
+
+float Vector2::DistanceTo(Vector2 otherVector)
+{
+	float xDiff = x - otherVector.x;
+	float yDiff = y - otherVector.y;
+	float distance = sqrtf((xDiff * xDiff) + (yDiff * yDiff));
+
+	return distance;
 }
 
 Vector2 Vector2::operator+(const Vector2& other)

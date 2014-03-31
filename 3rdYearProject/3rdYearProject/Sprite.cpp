@@ -20,8 +20,35 @@ Sprite::Sprite(CC_Texture* texture, int width, int height)
 	m_Animate = true;
 	m_Looping = true;
 
-	m_NumStates = 1;
+	m_NumStates = m_Columns * m_Rows;
 	m_CurrentState = 0;
+
+	m_Finished = false;
+}
+
+Sprite::Sprite(CC_Texture* texture, int width, int height, bool looping)
+{
+	m_p_Texture = texture;
+
+	m_DestinationRect.w = width;
+	m_DestinationRect.h = height;
+
+	m_SourceRect.w = width;
+	m_SourceRect.h = height;
+
+	m_Columns = texture->GetWidth() / width;
+	m_Rows = texture->GetHeight() / height;
+
+	m_Timer = 0;
+	m_Interval = 100;
+
+	m_Animate = true;
+	m_Looping = looping;
+
+	m_NumStates = m_Columns * m_Rows;
+	m_CurrentState = 0;
+
+	m_Finished = false;
 }
 
 Sprite::~Sprite()
@@ -52,6 +79,7 @@ void Sprite::Update(Uint32 timeElapsed)
         else
         {
             m_CurrentState--;     //Animation has reached end so drop back one so the image can be drawn
+			m_Finished = true;
         }
     }
 }
@@ -70,4 +98,15 @@ void Sprite::Draw(SDL_Renderer* renderer, Vector2 position)
 CC_Texture* Sprite::GetTexture()
 {
 	return m_p_Texture;
+}
+
+bool Sprite::GetFinished()
+{
+	return m_Finished;
+}
+
+void Sprite::ResetAnimation()
+{
+	m_CurrentState = 0;
+	m_Finished = false;
 }

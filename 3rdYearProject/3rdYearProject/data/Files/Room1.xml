@@ -64,102 +64,12 @@
 	<Tile>
 		<Index>1</Index>
 		<Passable>1</Passable>
-		<Code>1</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
 		<Code>0</Code>
 	</Tile>
 	<Tile>
 		<Index>1</Index>
 		<Passable>1</Passable>
 		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>0</Index>
-		<Passable>0</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>0</Index>
-		<Passable>0</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>0</Index>
-		<Passable>0</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>0</Index>
-		<Passable>0</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>0</Code>
-	</Tile>
-	<Tile>
-		<Index>1</Index>
-		<Passable>1</Passable>
-		<Code>1</Code>
 	</Tile>
 	<Tile>
 		<Index>1</Index>
@@ -264,7 +174,97 @@
 	<Tile>
 		<Index>1</Index>
 		<Passable>1</Passable>
-		<Code>1</Code>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>0</Index>
+		<Passable>0</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>0</Index>
+		<Passable>0</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>0</Index>
+		<Passable>0</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>0</Index>
+		<Passable>0</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
+	</Tile>
+	<Tile>
+		<Index>1</Index>
+		<Passable>1</Passable>
+		<Code>0</Code>
 	</Tile>
 	<Tile>
 		<Index>0</Index>

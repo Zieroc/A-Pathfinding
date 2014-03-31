@@ -20,11 +20,14 @@ public:
 	PathNode* GetNode();
 	int GetCode();
 	void SetCode(int code);
+	void SetOccupied(bool occupied);
+	bool GetOccupied();
 private:
 	int m_XCell;
 	int m_YCell;
 	int m_Index;
 	bool m_Passable;
+	bool m_Occupied;
 	PathNode* m_p_Node;
 	int m_Code; //0 - Nothing, 1 - Player Spawn Points, 2 - Enemy Spawn Point
 };

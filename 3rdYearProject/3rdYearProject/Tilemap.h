@@ -23,8 +23,8 @@ public:
 	static const int NUM_ROOMS_ROW = 3;
 	static const int NUM_ROOMS_COL = 3;
 	static const int NUM_ROOMS = NUM_ROOMS_COL * NUM_ROOMS_ROW;
-	static const int MAP_WIDTH = ROOM_WIDTH * NUM_ROOMS_ROW;
-	static const int MAP_HEIGHT = ROOM_HEIGHT * NUM_ROOMS_COL;
+	static const int MAP_WIDTH = ROOM_WIDTH * NUM_ROOMS_COL;
+	static const int MAP_HEIGHT = ROOM_HEIGHT * NUM_ROOMS_ROW;
 	static const int DEFAULT_TILE = 2;
 	static const int NUMBER_OF_TILES = 3;
 

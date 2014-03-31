@@ -10,10 +10,13 @@ class Sprite
 {
 public:
 	Sprite(CC_Texture* texture, int width, int height);
+	Sprite(CC_Texture* texture, int width, int height, bool loop);
 	~Sprite();
 	void Update(Uint32 timeElapsed);
 	void Draw(SDL_Renderer* renderer, Vector2 position);
 	CC_Texture* GetTexture();
+	bool GetFinished();
+	void ResetAnimation();
 private:
 	CC_Texture* m_p_Texture;
 	SDL_Rect m_SourceRect; //Used to crop the image for animation frames
@@ -26,6 +29,7 @@ private:
 	int m_CurrentState;
 	int m_NumStates;
 	bool m_Looping;
+	bool m_Finished;
 };
 
 #endif

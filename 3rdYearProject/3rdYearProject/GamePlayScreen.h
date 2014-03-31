@@ -4,12 +4,8 @@
 #include "GameScreen.h"
 #include "TileMap.h"
 #include "InputHandler.h"
-#include "LevelMap.h"
-#include "EnemyManager.h"
-#include "PlayerManager.h"
-#include "Action.h"
+#include "LevelManager.h"
 #include "Button.h"
-#include "EnemyFactory.h"
 
 class GameplayScreen : public GameScreen
 {
@@ -25,20 +21,18 @@ public:
 	void HandleEvents(SDL_Event sdlEvent);
 	void EndTurn();
 	static void Wrapper_To_End_Turn(void* ptrObj);
-	void UseAction(Action* action, Character* target);
+	void Attack(); //1 Player Attack, 2 Enemy Attack
+	static void Wrapper_To_Attack(void* ptrObj);
 	CC_Texture* RenderText(const char* message, SDL_Renderer*);
 private:
-	LevelMap* m_p_Map;
-	bool clicked;
-	Character* m_p_SelectedPlayer;
-	PlayerManager* m_p_PlayerManager;
-	EnemyManager* m_p_EnemyManager;
-	EnemyFactory* m_p_EnemyFactory;
-	int m_Turn;
-	Button* m_p_Button;
+	LevelManager* m_p_LevelManager;
+	Button* m_p_EndTurnButton;
+	Button* m_p_AttackButton;
 	Sprite* m_p_ActionMenu;
-	Sprite* m_p_Selected; //Temp
-
+	Sprite* m_p_Selected;
+	SoundManager* m_p_SoundManager;
+	Character* m_p_SelectedPlayer;
+	int m_Turn;
 	TTF_Font* m_p_Font;
 	CC_Texture* m_p_APText;
 	CC_Texture* m_p_HealthText;

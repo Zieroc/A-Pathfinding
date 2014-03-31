@@ -8,6 +8,7 @@ public:
 	Vector2(float xVal, float yVal);
 	~Vector2();
 	void Clamp(Vector2 lowBounds, Vector2 highBounds);
+	float DistanceTo(Vector2 otherVector);
 	Vector2 operator+(const Vector2& other);
 	Vector2 operator-(const Vector2& other);
 	Vector2 operator*(const Vector2& other);

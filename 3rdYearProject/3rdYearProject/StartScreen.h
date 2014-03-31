@@ -19,8 +19,12 @@ public:
 	void HandleEvents(SDL_Event sdlEvent);
 	void StartGame();
 	static void Wrapper_To_Start_Game(void* ptrObj);
+	void HowToPlay();
+	static void Wrapper_To_How_To_Play(void* ptrObj);
 private:
 	Button* m_p_StartButton;
+	Button* m_p_HowToPlay;
+	Sprite* m_p_Background;
 };
 
 #endif

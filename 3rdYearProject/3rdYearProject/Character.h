@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include "GameObject.h"
+#include "SoundManager.h"
 
 class Character : public GameObject
 {
@@ -9,7 +10,7 @@ public:
 	Character();
 	Character(Vector2 position, int speed);
 	virtual ~Character();
-	void Initialize(Sprite* sprites[], TileMap* map);
+	void Initialize(Sprite* sprites[], TileMap* map, SoundManager* soundMan);
 	virtual void Update(Uint32 timeElapsed, int turn);
 	virtual void SetTarget(Vector2 target);
 	virtual void Move(Uint32 timeElapsed);
@@ -22,6 +23,7 @@ public:
 	int GetMaxAP();
 	int GetCurrentHealth();
 	int GetMaxHealth();
+	void UnoccupyMap();
 protected:
 	void HorizontalTileCollisionTest();
 	void VerticalTileCollisionTest();
@@ -36,6 +38,7 @@ protected:
 	int m_CurrentAP;
 	int m_MaxHealth;
 	int m_CurrentHealth;
+	SoundManager* m_p_SoundManager;
 };
 
 #endif

@@ -87,12 +87,10 @@ void ScreenManager::AddScreen(GameScreen* screen, bool removePrevious)
 	{
 		RemoveScreen();
 	}
-	else
+
+	if(!m_p_Screens.empty())
 	{
-		if(!m_p_Screens.empty())
-		{
-			m_p_Screens.front()->SetCovered(true);
-		}
+		m_p_Screens.front()->SetCovered(true);
 	}
 
 	screen->Initialize(this);
@@ -124,4 +122,14 @@ void ScreenManager::RemoveScreen()
 Camera* ScreenManager::GetCamera()
 {
 	return m_p_Camera;
+}
+
+bool ScreenManager::GetRunning()
+{
+	return m_Running;
+}
+
+void ScreenManager::SetRunning(bool running)
+{
+	m_Running = running;
 }

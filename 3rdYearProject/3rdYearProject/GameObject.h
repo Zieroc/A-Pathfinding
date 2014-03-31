@@ -7,7 +7,7 @@
 #include "Vector2.h"
 #include <SDL.h>
 
-#define MAX_SPRITE 1
+#define MAX_SPRITE 2
 
 class GameObject
 {
@@ -27,6 +27,7 @@ public:
 	void SetSpeed(int speed);
 	void SetBounds(int width, int height);
 	void CalcBounds();
+	void SwitchAnimation(int animation);
 protected:
 
 	Vector2 m_Position;
@@ -35,6 +36,7 @@ protected:
 	SDL_Rect m_Bounds;
 	Sprite* m_p_Sprites[MAX_SPRITE];
 	Sprite* m_p_CurrentSprite;
+	int spriteIndex;
 };
 
 #endif

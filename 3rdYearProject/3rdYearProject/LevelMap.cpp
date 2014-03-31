@@ -13,17 +13,19 @@ LevelMap::~LevelMap()
 {
 	delete(m_p_Map);
 
-	for(int i = 0; i < TileMap::NUM_ROOMS; i++)
+	//Room class no longer used
+	/*for(int i = 0; i < TileMap::NUM_ROOMS; i++)
 	{
 		if(m_Rooms[i] != NULL)
 		{
 			delete(m_Rooms[i]);
 		}
-	}
+	}*/
 }
 
 void LevelMap::GenerateMap()
 {
+	int enemyRooms[3] = {-1, -1, -1};
 	m_p_Map->ClearMap();
 	vector<int> openRooms;
 	vector<int> closedRooms;
@@ -72,6 +74,24 @@ void LevelMap::GenerateMap()
 		}
 	}
 
+	for(int i = 0; i < 3; i++)
+	{
+		bool allowed = false;
+		int num;
+
+		while(!allowed)
+		{
+			num = (rand() % (openRooms.size() - 1)) + 1;
+
+			if(openRooms[num] != enemyRooms[0] && openRooms[num] != enemyRooms[1] && openRooms[num] != enemyRooms[2])
+			{
+				allowed = true;
+			}
+		}
+
+		enemyRooms[i] = openRooms[num];
+	}
+
 	//Generate level files
 	while(!openRooms.empty())
 	{
@@ -84,10 +104,27 @@ void LevelMap::GenerateMap()
 		{
 			col = TileMap::NUM_ROOMS_COL - 1;
 		}
-		int lvl = rand() % 3 + 1;
-		//lvl = 1;
+		
 		std::ostringstream ss;
-		ss << "data/Files/Room" << lvl << ".xml";
+
+		if(room != 1)
+		{
+			if(room == enemyRooms[0] || room == enemyRooms[1] || room == enemyRooms[2])
+			{
+				int lvl = rand() % 3 + 1;
+				ss << "data/Files/EnemyRoom" << lvl << ".xml";
+			}
+			else
+			{
+				int lvl = rand() % 3 + 1;
+				ss << "data/Files/Room" << lvl << ".xml";
+			}
+		}
+		else
+		{
+			ss << "data/Files/SpawnRoom.xml";
+		}
+
 		m_p_Map->LoadRoom(ss.str().c_str(), 0 + (col * TileMap::ROOM_WIDTH), 0 + (row * TileMap::ROOM_HEIGHT));	
 	}
 
